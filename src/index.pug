@@ -1,0 +1,33 @@
+//- index.pug
+- css = "css/main.css"
+- eyes = 0
+- brainPiece = 0
+
+link(rel="stylesheet" href=css)
+.character
+	//- .head
+	//- 	.brain
+	.head
+		.skull
+			.brain
+				while brainPiece < 4
+					- brainPiece++
+					.piece
+		.face
+			while eyes < 3
+				- eyes++
+				include svg/teardrop.svg
+				.thing
+
+					.eye
+						
+
+		.mouth
+			.lips
+		
+.buttons
+	.btn.laugh Make me laugh XD
+	.btn.cry Make me cry :(
+	.btn.crazy Make me crazy! 8D
+script
+	include js/index.js

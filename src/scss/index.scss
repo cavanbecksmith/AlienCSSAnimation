@@ -1,0 +1,333 @@
+@import url('https://fonts.googleapis.com/css?family=Nanum+Pen+Script');
+
+$alien-helmet: #b2ff9b;
+$eye-color: white;
+$btn-font: 'Nanum Pen Script', cursive;
+
+
+// Lips
+$lipsX: 130px;
+
+*{
+	margin: 0;
+	padding: 0;
+}
+
+body{
+	background: #4E8DFF;
+	text-align: center;
+	width: 100%;
+	height: 100vh;
+}
+
+// Mixin for W/H
+@mixin size($width, $height, $max-height: null){
+	width: $width;
+	height: $height;
+	max-height: $max-height;
+}
+
+@mixin animation($time){
+  -webkit-transition: all $time ease-in-out;
+  -moz-transition: all $time ease-in-out;
+  -ms-transition: all $time ease-in-out;
+  -o-transition: all $time ease-in-out;
+  transition: all $time ease-in-out;
+}
+
+
+// Buttons
+
+.buttons{
+	@include size(250px, 100vh);
+	padding-left: 100px;
+	display: inline-block;
+	vertical-align: top;
+}
+
+.btn{
+	margin-top: 20px;
+	height: 79px;
+	padding: 18px;
+	box-sizing: border-box;
+	display: block;
+	background: #FFF;
+	font-size: 30px;
+	font-family: $btn-font;
+	letter-spacing: 0.01em;
+	@include animation(0.5s);
+	cursor: pointer;
+	&:hover{
+		background: black;
+		color: white;
+		transform: scale(1.25);
+	}
+}
+
+
+// Character container
+.character{
+	@include size(450px, 100vh);
+	position: relative;
+	display: inline-block;
+}
+
+// Head & skull
+.head{
+	position: relative;
+	&.laugh{
+		animation-name: laugh-head;
+		animation-iteration-count: 1;
+		animation-duration: 1.25s;
+	}
+
+	&.cry{
+		animation-name: cry-head;
+		animation-iteration-count: 1;
+		animation-duration: 1.25s;
+	}
+
+	.skull{
+		@include size(450px, 200px);
+		background: $alien-helmet;
+		border-top-left-radius: 50%;
+		border-top-right-radius: 50%;
+		position: relative;
+		.brain{
+			@include size(40px, 40px);
+		    position: absolute;
+		    transform-origin: center center;
+		    transform: translate(0%, 0%) rotate(0);
+		    display: inline-block;
+		    top: 80%;
+		    .piece{
+		    	width: 100%;
+		    	height: 100%;
+		    	position: absolute;
+		    	display: inline-block;
+				background: pink;
+		    	border-radius: 50%;	
+		    	left: 0;
+		    	
+		    	$spacing: 60%;
+
+		    	&:nth-child(0){
+		    		transform: translateX(0);	
+		    	}
+
+		    	&:nth-child(1){
+		    		transform: translateX(-$spacing);	
+		    	}
+		    	&:nth-child(2){
+		    		transform: translateX($spacing);	
+		    	}
+		    	&:nth-child(3){
+		    		transform: translateY(-$spacing);	
+		    	}
+		    }
+		}
+	}
+}
+
+// Face
+.face{
+	@include size(450px, 90px);
+	background: #fff;
+	border-bottom-left-radius: 50px;
+	border-bottom-right-radius: 50px;
+ 	display: block;
+	position: relative;
+	transform: translate(0, 0);
+	transform-origin: center center;
+	.thing{
+		@include size(50px, 50px);
+		display: inline-block;
+		background-color: black;
+		margin: 5% 5% 0 5%;
+		border-radius: 50%;
+		overflow: hidden; 
+		.eye{
+			@include size(20px, 20px);
+			transform-origin: center center;
+			background-color: $eye-color;
+			border-radius: 10px;
+		 	margin-top: -10px;
+			top: 20px;
+			position: relative;
+			border: 1px solid #000;
+			transition: 0.2s ease;
+		}
+	}
+}
+
+// Mouth
+.mouth{
+	@include size(300px, 130px);
+	background: white;
+ 	border-radius: 50px;
+ 	display: block;
+	position: relative;
+	transform: translate(25%, -2px);
+	z-index: -1;
+	.lips{
+		@include size(100px, 50px);
+    	transform: translate($lipsX, 15px);
+		position: relative;
+		animation-duration: 3s;
+		border-bottom: 10px solid black;
+		border-radius: 50%;
+		transform-origin: bottom right;
+		transition: all 0.5s ease;
+		&.laugh{
+			animation-name: laugh-lips;
+			animation-iteration-count: 1;
+			animation-duration: 1.25s;
+		}
+		&.cry{
+			transform: translateY(50px) translateX($lipsX);
+			border-bottom: 0;
+			border-top: 10px solid black;
+  			// transition: all 0.5s ease;
+  			animation-name: cry-lips;
+  			animation-iteration-count: 1;
+  			animation-duration: 1.25s;
+		}
+	}
+}
+
+// Animation for the lips to laugh laugh
+@keyframes laugh-lips {
+  0%{
+	  border-width: 10px;
+  }
+
+	0%{
+		border-width: 30px;
+		transform: translate($lipsX, -10px)
+	}
+	
+	20%{
+		border-width: 40px;
+		transform: translate($lipsX, -30px)
+	}
+	
+	30%{
+		border-width: 60px;
+		transform: translate($lipsX, -30px);
+	}
+	
+	40%{
+		border-width: 40px;
+		transform: translate($lipsX, -20px);
+	}
+	
+	50%{
+		border-width: 30px;
+		transform: translate($lipsX, -10px)
+	}
+	
+	60%{
+		border-width: 40px;
+		transform: translate($lipsX, -30px)
+	}
+	
+	70%{
+		border-width: 60px;
+		transform: translate($lipsX, -30px);
+	}
+	
+// 	80%{
+// 		border-width: 40px;
+// 		transform: translate(130px, -20px);
+// 	}
+
+	80%, 100%{
+		border-width: 10px;
+		// transform: translate(130px, -30px)
+	}
+	
+}
+
+// Bobs head when laughing
+@keyframes laugh-head{
+	0%{
+		transform: translateY(0);
+	}
+	20%{
+		transform: translateY(10px);
+	}
+	
+	30%{
+		transform: translateY(20px);
+	}
+	
+	40%{
+		transform: translateY(50px);
+	}
+	
+	50%{
+		transform: translateY(30px);
+	}
+	
+	60%{
+		transform: translateY(50px);
+	}
+	
+	80%, 100%{
+		transform: translateY(0);
+	}
+}
+
+
+// Crying
+@keyframes cry-head{
+
+	// 0%{
+	// }
+
+	// 25%{
+	// 	transform: translateY(25px)
+	// }
+
+	50%{
+		transform: translateY(50px)
+	}
+
+	100%{
+		transform: translateY(0px)
+	}
+	
+
+}
+
+@keyframes cry-lips{
+	25%{
+		transform: translateY(60px) translateX($lipsX);
+		border-top: 10px solid black;
+	}
+
+	50%{
+		border-radius: 50%;
+	}
+
+	100%{
+		
+	}
+	0%{
+		border-top: 10px solid black;	
+	}
+}
+
+
+// Animation for a sweet smile
+@keyframes smile {
+  from {
+	  width: 100px;
+	  height: 10px;
+  }
+
+  to {
+	height: 50px;
+	border-radius: 50%;
+  }
+}
