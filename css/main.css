@@ -1,0 +1,214 @@
+@import url("https://fonts.googleapis.com/css?family=Nanum+Pen+Script");
+* {
+  margin: 0;
+  padding: 0; }
+
+body {
+  background: #4E8DFF;
+  text-align: center;
+  width: 100%;
+  height: 100vh; }
+
+.buttons {
+  width: 250px;
+  height: 100vh;
+  padding-left: 100px;
+  display: inline-block;
+  vertical-align: top; }
+
+.btn {
+  margin-top: 20px;
+  height: 79px;
+  padding: 18px;
+  box-sizing: border-box;
+  display: block;
+  background: #FFF;
+  font-size: 30px;
+  font-family: "Nanum Pen Script", cursive;
+  letter-spacing: 0.01em;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -ms-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  cursor: pointer; }
+  .btn:hover {
+    background: black;
+    color: white;
+    transform: scale(1.25); }
+
+.character {
+  width: 450px;
+  height: 100vh;
+  position: relative;
+  display: inline-block; }
+
+.head {
+  position: relative; }
+  .head.laugh {
+    animation-name: laugh-head;
+    animation-iteration-count: 1;
+    animation-duration: 1.25s; }
+  .head.cry {
+    animation-name: cry-head;
+    animation-iteration-count: 1;
+    animation-duration: 1.25s; }
+  .head .skull {
+    width: 450px;
+    height: 200px;
+    background: #b2ff9b;
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
+    position: relative; }
+    .head .skull .brain {
+      width: 40px;
+      height: 40px;
+      position: absolute;
+      transform-origin: center center;
+      transform: translate(0%, 0%) rotate(0);
+      display: inline-block;
+      top: 80%; }
+      .head .skull .brain .piece {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        display: inline-block;
+        background: pink;
+        border-radius: 50%;
+        left: 0; }
+        .head .skull .brain .piece:nth-child(0) {
+          transform: translateX(0); }
+        .head .skull .brain .piece:nth-child(1) {
+          transform: translateX(-60%); }
+        .head .skull .brain .piece:nth-child(2) {
+          transform: translateX(60%); }
+        .head .skull .brain .piece:nth-child(3) {
+          transform: translateY(-60%); }
+
+.face {
+  width: 450px;
+  height: 90px;
+  background: #fff;
+  border-bottom-left-radius: 50px;
+  border-bottom-right-radius: 50px;
+  display: block;
+  position: relative;
+  transform: translate(0, 0);
+  transform-origin: center center; }
+  .face .thing {
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    background-color: black;
+    margin: 5% 5% 0 5%;
+    border-radius: 50%;
+    overflow: hidden; }
+    .face .thing .eye {
+      width: 20px;
+      height: 20px;
+      transform-origin: center center;
+      background-color: white;
+      border-radius: 10px;
+      margin-top: -10px;
+      top: 20px;
+      position: relative;
+      border: 1px solid #000;
+      transition: 0.2s ease; }
+
+.mouth {
+  width: 300px;
+  height: 130px;
+  background: white;
+  border-radius: 50px;
+  display: block;
+  position: relative;
+  transform: translate(25%, -2px);
+  z-index: -1; }
+  .mouth .lips {
+    width: 100px;
+    height: 50px;
+    transform: translate(130px, 15px);
+    position: relative;
+    animation-duration: 3s;
+    border-bottom: 10px solid black;
+    border-radius: 50%;
+    transform-origin: bottom right;
+    transition: all 0.5s ease; }
+    .mouth .lips.laugh {
+      animation-name: laugh-lips;
+      animation-iteration-count: 1;
+      animation-duration: 1.25s; }
+    .mouth .lips.cry {
+      transform: translateY(50px) translateX(130px);
+      border-bottom: 0;
+      border-top: 10px solid black;
+      animation-name: cry-lips;
+      animation-iteration-count: 1;
+      animation-duration: 1.25s; }
+
+@keyframes laugh-lips {
+  0% {
+    border-width: 10px; }
+  0% {
+    border-width: 30px;
+    transform: translate(130px, -10px); }
+  20% {
+    border-width: 40px;
+    transform: translate(130px, -30px); }
+  30% {
+    border-width: 60px;
+    transform: translate(130px, -30px); }
+  40% {
+    border-width: 40px;
+    transform: translate(130px, -20px); }
+  50% {
+    border-width: 30px;
+    transform: translate(130px, -10px); }
+  60% {
+    border-width: 40px;
+    transform: translate(130px, -30px); }
+  70% {
+    border-width: 60px;
+    transform: translate(130px, -30px); }
+  80%, 100% {
+    border-width: 10px; } }
+
+@keyframes laugh-head {
+  0% {
+    transform: translateY(0); }
+  20% {
+    transform: translateY(10px); }
+  30% {
+    transform: translateY(20px); }
+  40% {
+    transform: translateY(50px); }
+  50% {
+    transform: translateY(30px); }
+  60% {
+    transform: translateY(50px); }
+  80%, 100% {
+    transform: translateY(0); } }
+
+@keyframes cry-head {
+  50% {
+    transform: translateY(50px); }
+  100% {
+    transform: translateY(0px); } }
+
+@keyframes cry-lips {
+  25% {
+    transform: translateY(60px) translateX(130px);
+    border-top: 10px solid black; }
+  50% {
+    border-radius: 50%; }
+  100% { }
+  0% {
+    border-top: 10px solid black; } }
+
+@keyframes smile {
+  from {
+    width: 100px;
+    height: 10px; }
+  to {
+    height: 50px;
+    border-radius: 50%; } }
