@@ -3,7 +3,8 @@
 $alien-helmet: #b2ff9b;
 $eye-color: white;
 $btn-font: 'Nanum Pen Script', cursive;
-
+$face-color: #b59ae5;
+$body-bk: #b3cdff;
 
 // Lips
 $lipsX: 130px;
@@ -28,13 +29,33 @@ body{
 }
 
 @mixin animation($time){
-  -webkit-transition: all $time ease-in-out;
-  -moz-transition: all $time ease-in-out;
-  -ms-transition: all $time ease-in-out;
-  -o-transition: all $time ease-in-out;
-  transition: all $time ease-in-out;
+	-webkit-transition: all $time ease-in-out;
+	-moz-transition: all $time ease-in-out;
+	-ms-transition: all $time ease-in-out;
+	-o-transition: all $time ease-in-out;
+	transition: all $time ease-in-out;
 }
 
+
+@mixin bgcolor($arr, $className){ 
+	0% {background-color: #ffccf2; }
+	50% { background-color: #ccffcc; }
+	100% { background-color: #ccffff; } 
+
+	$arr: #fff, #000,#eee;
+	$counter: 3;
+
+	@each $currentColor in $arr{
+	    $i: index($colors-list, $current-color);
+	}
+
+    #{className}-#{$i}{
+        color: $current-color;
+        background-color: nth($background-colors-list, $i);
+        border: 1px solid nth($border-colors-list, $i);
+    }
+
+}
 
 // Buttons
 
@@ -74,6 +95,7 @@ body{
 
 // Head & skull
 .head{
+  	filter: drop-shadow(20px 20px 20px #333);
 	position: relative;
 	&.laugh{
 		animation-name: laugh-head;
@@ -132,7 +154,8 @@ body{
 // Face
 .face{
 	@include size(450px, 90px);
-	background: #fff;
+	// background: #fff;
+	background: $face-color;
 	border-bottom-left-radius: 50px;
 	border-bottom-right-radius: 50px;
  	display: block;
@@ -158,12 +181,20 @@ body{
 			transition: 0.2s ease;
 		}
 	}
+	.tear{
+		opacity: 0;
+		&.cry{
+			animation-name: cry-tear;
+			animation-iteration-count: 1;
+			animation-duration: 1.25s;
+		}
+	}
 }
 
 // Mouth
 .mouth{
 	@include size(300px, 130px);
-	background: white;
+	background: $face-color;
  	border-radius: 50px;
  	display: block;
 	position: relative;
@@ -191,6 +222,7 @@ body{
   			animation-name: cry-lips;
   			animation-iteration-count: 1;
   			animation-duration: 1.25s;
+  			// transition: cry-lips 1.25s ease-in-out;
 		}
 	}
 }
@@ -282,13 +314,6 @@ body{
 // Crying
 @keyframes cry-head{
 
-	// 0%{
-	// }
-
-	// 25%{
-	// 	transform: translateY(25px)
-	// }
-
 	50%{
 		transform: translateY(50px)
 	}
@@ -301,6 +326,9 @@ body{
 }
 
 @keyframes cry-lips{
+	0%{
+		border-top: 10px solid black;	
+	}
 	25%{
 		transform: translateY(60px) translateX($lipsX);
 		border-top: 10px solid black;
@@ -311,12 +339,43 @@ body{
 	}
 
 	100%{
-		
-	}
-	0%{
 		border-top: 10px solid black;	
 	}
 }
+
+
+@keyframes cry-tear{
+	// 0%{
+	// }
+	// 25%{
+	// 	transform: translateY(60px) translateX($lipsX);
+	// 	border-top: 10px solid black;
+	// }
+
+	// 50%{
+	// 	border-radius: 50%;
+	// }
+
+	// 100%{
+	// 	border-top: 10px solid black;	
+	// }	
+	from{
+		opacity: 0;
+		transform: scale(0.25,0.25);
+	}
+	to{
+		opacity: 1;
+		transform: translateY(100px) scale(0.5,0.5);
+	}
+}
+
+
+// @keyframes crazy-lips{
+// 	0%{}
+// 	25%{}
+// 	50%{}
+// 	100%{}
+// }
 
 
 // Animation for a sweet smile

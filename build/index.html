@@ -10,7 +10,7 @@
         <div class="piece"></div>
       </div>
     </div>
-    <div class="face"><svg class="teardrop" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+    <div class="face"><svg class="tear" width="100" height="100" xmlns="http://www.w3.org/2000/svg" style="position:absolute; z-index: -1; transform:scale(0.4, 0.4) translate(0, 100%)">
  <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
 
  <g>
@@ -27,7 +27,7 @@
 </svg>
       <div class="thing">
         <div class="eye"></div>
-      </div><svg class="teardrop" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+      </div><svg class="tear" width="100" height="100" xmlns="http://www.w3.org/2000/svg" style="position:absolute; z-index: -1; transform:scale(0.4, 0.4) translate(0, 100%)">
  <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
 
  <g>
@@ -44,7 +44,24 @@
 </svg>
       <div class="thing">
         <div class="eye"></div>
-      </div><svg class="teardrop" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+      </div><svg class="tear" width="100" height="100" xmlns="http://www.w3.org/2000/svg" style="position:absolute; z-index: -1; transform:scale(0.4, 0.4) translate(0, 100%)">
+ <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
+
+ <g>
+  <title>background</title>
+  <rect x="-1" y="-1" width="102" height="102" id="canvas_background" fill="none"/>
+  <g id="canvasGrid" display="none">
+   <rect id="svg_1" width="100%" height="100%" x="0" y="0" stroke-width="0" fill="url(#gridpattern)"/>
+  </g>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <path fill="#56aaff" stroke-width="1.5" d="m43.132911,5c0,0 -69,88 12,88c81,0 -12,-88 -12,-88z" id="svg_2"/>
+ </g>
+</svg>
+      <div class="thing">
+        <div class="eye"></div>
+      </div><svg class="tear" width="100" height="100" xmlns="http://www.w3.org/2000/svg" style="position:absolute; z-index: -1; transform:scale(0.4, 0.4) translate(0, 100%)">
  <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
 
  <g>
@@ -113,6 +130,7 @@ document.body.addEventListener('mousemove', function(e){
 var thing = document.querySelectorAll(".thing");
 var lips = document.querySelector('div.lips');
 var head = document.querySelector('.head');
+var tears = document.querySelectorAll(".tear");
 
 // Buttons
 var laughBtn = document.querySelector('div.btn.laugh');
@@ -127,18 +145,6 @@ PrefixedEvent(lips, 'animationend', removeEmotionalStates);
 PrefixedEvent(head, 'animationend', removeEmotionalStates);
 
 
-// PrefixedEvent(lips, 'animationstart', removeEmotionalStatesI);
-// PrefixedEvent(head, 'animationstart', removeEmotionalStatesI);
-// function removeEmotionalStatesI (animInfo) {
-// 	var emotion = animInfo.animationName.replace(/(-)\w+/g, '');
-// 	for (var i = 0; i < emotionalStates.length; i++) {
-// 		if(emotionalStates[i] != emotion){
-// 			this.classList.remove(emotionalStates[i]);	
-// 		}
-// 	}
-// }
-
-
 /**
  * Removes emotion classes from
  * Whereever the class needs to come from
@@ -146,13 +152,13 @@ PrefixedEvent(head, 'animationend', removeEmotionalStates);
  * @scope: this = {HTMLDomElement}
  */
 function removeEmotionalStates(animInfo){
+	console.log(animInfo);
 	for (var i = 0; i < emotionalStates.length; i++) {
 		if(this.classList.contains(emotionalStates[i])){
 			this.classList.remove(emotionalStates[i]);
 		}
 	}
 }
-
 
 /**
  * Log something with styling
@@ -161,9 +167,6 @@ function removeEmotionalStates(animInfo){
  */
 function moveEye(left, top){
 
-	// console.log(left, top);
-	
-	
 	if(left > boundaries.left.max){
 		left = boundaries.left.max;
 	}
@@ -194,19 +197,16 @@ function doLaugh(){
 function doCry(){
 	lips.classList.add('cry');
 	head.classList.add('cry');
+	for (var i = 0; i < tears.length; i++) {
+		tears[i].classList.add('cry');
+	}
 }
 
-function beCrazee(){
-
-}
-
-
-function makeTearDrop(){}
+function beCrazee(){}
 
 function makeTearDrop(el, duration) {
     this.el = el;
     this.duration = duration;
-
 }
 
 // Helpers

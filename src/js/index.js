@@ -38,6 +38,7 @@ document.body.addEventListener('mousemove', function(e){
 var thing = document.querySelectorAll(".thing");
 var lips = document.querySelector('div.lips');
 var head = document.querySelector('.head');
+var tears = document.querySelectorAll(".tear");
 
 // Buttons
 var laughBtn = document.querySelector('div.btn.laugh');
@@ -52,18 +53,6 @@ PrefixedEvent(lips, 'animationend', removeEmotionalStates);
 PrefixedEvent(head, 'animationend', removeEmotionalStates);
 
 
-// PrefixedEvent(lips, 'animationstart', removeEmotionalStatesI);
-// PrefixedEvent(head, 'animationstart', removeEmotionalStatesI);
-// function removeEmotionalStatesI (animInfo) {
-// 	var emotion = animInfo.animationName.replace(/(-)\w+/g, '');
-// 	for (var i = 0; i < emotionalStates.length; i++) {
-// 		if(emotionalStates[i] != emotion){
-// 			this.classList.remove(emotionalStates[i]);	
-// 		}
-// 	}
-// }
-
-
 /**
  * Removes emotion classes from
  * Whereever the class needs to come from
@@ -71,13 +60,13 @@ PrefixedEvent(head, 'animationend', removeEmotionalStates);
  * @scope: this = {HTMLDomElement}
  */
 function removeEmotionalStates(animInfo){
+	console.log(animInfo);
 	for (var i = 0; i < emotionalStates.length; i++) {
 		if(this.classList.contains(emotionalStates[i])){
 			this.classList.remove(emotionalStates[i]);
 		}
 	}
 }
-
 
 /**
  * Log something with styling
@@ -86,9 +75,6 @@ function removeEmotionalStates(animInfo){
  */
 function moveEye(left, top){
 
-	// console.log(left, top);
-	
-	
 	if(left > boundaries.left.max){
 		left = boundaries.left.max;
 	}
@@ -119,19 +105,16 @@ function doLaugh(){
 function doCry(){
 	lips.classList.add('cry');
 	head.classList.add('cry');
+	for (var i = 0; i < tears.length; i++) {
+		tears[i].classList.add('cry');
+	}
 }
 
-function beCrazee(){
-
-}
-
-
-function makeTearDrop(){}
+function beCrazee(){}
 
 function makeTearDrop(el, duration) {
     this.el = el;
     this.duration = duration;
-
 }
 
 // Helpers
