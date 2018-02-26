@@ -44,6 +44,7 @@ body {
   display: inline-block; }
 
 .head {
+  filter: drop-shadow(20px 20px 20px #333);
   position: relative; }
   .head.laugh {
     animation-name: laugh-head;
@@ -88,7 +89,7 @@ body {
 .face {
   width: 450px;
   height: 90px;
-  background: #fff;
+  background: #b59ae5;
   border-bottom-left-radius: 50px;
   border-bottom-right-radius: 50px;
   display: block;
@@ -114,11 +115,17 @@ body {
       position: relative;
       border: 1px solid #000;
       transition: 0.2s ease; }
+  .face .tear {
+    opacity: 0; }
+    .face .tear.cry {
+      animation-name: cry-tear;
+      animation-iteration-count: 1;
+      animation-duration: 1.25s; }
 
 .mouth {
   width: 300px;
   height: 130px;
-  background: white;
+  background: #b59ae5;
   border-radius: 50px;
   display: block;
   position: relative;
@@ -196,14 +203,23 @@ body {
     transform: translateY(0px); } }
 
 @keyframes cry-lips {
+  0% {
+    border-top: 10px solid black; }
   25% {
     transform: translateY(60px) translateX(130px);
     border-top: 10px solid black; }
   50% {
     border-radius: 50%; }
-  100% { }
-  0% {
+  100% {
     border-top: 10px solid black; } }
+
+@keyframes cry-tear {
+  from {
+    opacity: 0;
+    transform: scale(0.25, 0.25); }
+  to {
+    opacity: 1;
+    transform: translateY(100px) scale(0.5, 0.5); } }
 
 @keyframes smile {
   from {
