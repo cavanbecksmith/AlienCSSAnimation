@@ -109,6 +109,7 @@ document.body.addEventListener('mousemove', function(e){
 var thing = document.querySelectorAll(".thing");
 var lips = document.querySelector('div.lips');
 var head = document.querySelector('.head');
+var bodyTag = document.body;
 var tears = document.querySelectorAll(".tear");
 
 // Buttons
@@ -125,6 +126,7 @@ crazyBtn.addEventListener('click', beCrazee)
 PrefixedEvent(lips, 'animationend', removeEmotionalStates);
 PrefixedEvent(head, 'animationend', removeEmotionalStates);
 PrefixedEvent(tears, 'animationend', removeEmotionalStates, true);
+PrefixedEvent(bodyTag, 'animationend', removeEmotionalStates);
 
 /**
  * Removes emotion classes from
@@ -190,6 +192,7 @@ function doCry(){
 function beCrazee(){
 	lips.classList.add('crazy');
 	head.classList.add('crazy');
+	bodyTag.classList.add('crazy');
 }
 
 function makeTearDrop(el, duration) {

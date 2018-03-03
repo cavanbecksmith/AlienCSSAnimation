@@ -20,6 +20,11 @@ body{
 	text-align: center;
 	width: 100%;
 	height: 100vh;
+	&.crazy{
+		animation-name: crazy-body;
+		animation-iteration-count: 1;
+		animation-duration: 1.25s;
+	}
 }
 
 // Mixin for W/H
@@ -490,6 +495,43 @@ body{
 	}
 	to{
 		transform: translateY(50px)
+	}
+}
+
+@keyframes crazy-body{
+	0%{
+		filter: hue-rotate(0deg);
+	}
+	50%{
+		filter: hue-rotate(180deg);
+	}
+	100%{
+		filter: hue-rotate(360deg);
+	}
+}
+
+
+@keyframes crazy-iris{
+	0%{
+		transform: translate(0, 180px) rotate(90deg);
+	}
+	50%{
+		transform: translate(180px, 360px) rotate(180deg);
+	}
+	100%{
+		filter: hue-rotate(360deg);
+	}
+}
+
+@keyframes crazy-pupil{
+	0%{
+		filter: hue-rotate(0deg);
+	}
+	50%{
+		filter: hue-rotate(180deg);
+	}
+	100%{
+		filter: hue-rotate(360deg);
 	}
 }
 
