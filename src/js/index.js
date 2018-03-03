@@ -19,18 +19,89 @@ var boundaries = {
 	}
 }
 
-var emotionalStates = ['laugh', 'cry'];
+var eye = document.querySelectorAll('.eye');
+var iris = document.querySelectorAll(".iris");
+var pupil = document.querySelectorAll(".pupil");
+var emotionalStates = ['laugh', 'cry', 'crazy'];
 
 document.body.addEventListener('mousemove', function(e){
 	if(mouseActive){
-		// console.log(e);
-		mouseX = e.pageX;
-		mouseY = e.pageY;
+
+		// --- OPTION A 
+		// // console.log(e);
+		// mouseX = e.pageX;
+		// mouseY = e.pageY;
 	
-		percentage.width = (e.pageX / screenW) * 100;
-		percentage.height = (e.pageY / screenH) * 100;
-		// log(percentage.width + ' ' + percentage.height + '');
-		moveEye(percentage.width, percentage.height);
+		// percentage.width = (e.pageX / screenW) * 100;
+		// percentage.height = (e.pageY / screenH) * 100;
+		// // log(percentage.width + ' ' + percentage.height + '');
+		// moveEye(percentage.width, percentage.height);
+
+		// --- OPTION B
+		  var sW = window.innerWidth;
+		  var sH = window.innerHeight;
+		  var cW = sW / 2;
+		  var cH = sH / 2;
+		  var mX = e.clientX;
+		  var mY = e.clientY;
+		  
+		  
+		  for(var i = 0; i < eye.length; i++) {
+
+		    // Gets the bounds for this eye
+		    var el = eye[i].getBoundingClientRect();
+
+		    // To get the center we first need to 
+		    // add the "left" + "width" / 2
+		    var eyeCenterX = el.left + el.width / 2;
+		    var eyeCenterY = el.top + el.height / 2;
+
+		    // console.log(eyeCenterX - mX);
+
+		    // Get eye center
+		    var dX = eyeCenterX - mX;
+
+		    // This caps the X position
+		    // if it goes over the threshhold
+		    if(dX < -200) {
+		      dX = -200;
+		    } else if(dX > 200) {
+		      dX = 200;
+		    }
+		    
+
+		    // This caps the Y position
+		    // if it goes over the threshhold
+		    var dY = eyeCenterY - mY;
+		    if(dY < -200) {
+		      dY = -200;
+		    } else if(dY > 200) {
+		      dY = 200;
+		    }
+		    
+		    // percentage X - Relative to over the eye
+		    var pX = (dX) * 100 / 200;
+
+		    if(i === 0){
+		      console.log(pX);
+		    }
+
+		    // To move pupil and iris 
+		    // {Number} * {%} / 100 * {Number} switch axis;
+		    // The -1 switches the axis around
+		    // so that it increments as you move the mouse down
+		    var moveIrisX = 40 * pX / 100 * -1;
+		    var movePupilX = 25 * pX / 100 * -1;
+
+		    // Percentage Y - Relative to over the eye
+		    var pY = (dY) * 100 / 200;
+
+		    var moveIrisY = 30 * pY / 100 * -1;
+		    var movePupilY = 25 * pY / 100 * -1;
+		    
+		    iris[i].style.transform = 'translate(' + moveIrisX + 'px, ' + moveIrisY + 'px)';
+		    pupil[i].style.transform = 'translate(' + movePupilX + 'px, ' + movePupilY + 'px)';
+		  };
 	}
 });
 
@@ -43,15 +114,17 @@ var tears = document.querySelectorAll(".tear");
 // Buttons
 var laughBtn = document.querySelector('div.btn.laugh');
 var cryBtn = document.querySelector('div.btn.cry');
+var crazyBtn = document.querySelector('div.btn.crazy');
 
 
 // Event listeners
 laughBtn.addEventListener('click', doLaugh)
 cryBtn.addEventListener('click', doCry)
+crazyBtn.addEventListener('click', beCrazee)
 
 PrefixedEvent(lips, 'animationend', removeEmotionalStates);
 PrefixedEvent(head, 'animationend', removeEmotionalStates);
-
+PrefixedEvent(tears, 'animationend', removeEmotionalStates, true);
 
 /**
  * Removes emotion classes from
@@ -95,6 +168,10 @@ function moveEye(left, top){
 	
 }
 
+function moveEyeAlt(){
+
+}
+
 
 function doLaugh(){
 	lips.classList.add('laugh');
@@ -110,7 +187,10 @@ function doCry(){
 	}
 }
 
-function beCrazee(){}
+function beCrazee(){
+	lips.classList.add('crazy');
+	head.classList.add('crazy');
+}
 
 function makeTearDrop(el, duration) {
     this.el = el;
@@ -133,15 +213,26 @@ var log = function(message){
  * @param  {String} type: Listener type
  * @param  {Function} callback: Doy... Ofcourse this is you callback func fool
  */
-function PrefixedEvent(element, type, callback) {
+function PrefixedEvent(element, type, callback, list) {
 
     var pfx = ["webkit", "moz", "MS", "o", ""];
- 
-	for (var p = 0; p < pfx.length; p++) {
+ 	
+    if(list){
+    	for(var i=0; i<element.length; i++){
+    		console.log(element[i]);
+			for (var p = 0; p < pfx.length; p++) {
+				if (!pfx[p]) type = type.toLowerCase();
+				element[i].addEventListener(pfx[p]+type, callback, false);
+			}
+    	}
+    }
+    else{
+		for (var p = 0; p < pfx.length; p++) {
 
-		if (!pfx[p]) type = type.toLowerCase();
+			if (!pfx[p]) type = type.toLowerCase();
 
-		element.addEventListener(pfx[p]+type, callback, false);
+			element.addEventListener(pfx[p]+type, callback, false);
 
+		}
 	}
 }

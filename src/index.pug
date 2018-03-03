@@ -2,6 +2,7 @@
 - css = "css/main.css"
 - eyes = 0
 - brainPiece = 0
+- tears = 0
 
 link(rel="stylesheet" href=css)
 
@@ -17,11 +18,15 @@ link(rel="stylesheet" href=css)
 		.face
 			while eyes < 4
 				- eyes++
-				include svg/teardrop.svg
+				//- include svg/teardrop.svg
 				.thing
 					.eye
-						
-
+						.iris
+							.pupil
+			.tears
+				while tears < 4
+					- tears++
+						include svg/teardrop.svg
 		.mouth
 			.lips
 		

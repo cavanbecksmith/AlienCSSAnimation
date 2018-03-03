@@ -1,10 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Nanum+Pen+Script');
 
 $alien-helmet: #b2ff9b;
-$eye-color: white;
+$eye-color: blue;
 $btn-font: 'Nanum Pen Script', cursive;
-$face-color: #b59ae5;
-$body-bk: #b3cdff;
+$face-color: #cfc8dc;
+$body-bk: #303642;
+$body-bk: mediumpurple;
 
 // Lips
 $lipsX: 130px;
@@ -15,7 +16,7 @@ $lipsX: 130px;
 }
 
 body{
-	background: #4E8DFF;
+	background: $body-bk;
 	text-align: center;
 	width: 100%;
 	height: 100vh;
@@ -108,6 +109,11 @@ body{
 		animation-iteration-count: 1;
 		animation-duration: 1.25s;
 	}
+	&.crazy{
+		animation-name: crazy-head;
+		animation-iteration-count: 1;
+		animation-duration: 1.25s;
+	}
 
 	.skull{
 		@include size(450px, 200px);
@@ -163,31 +169,133 @@ body{
 	transform: translate(0, 0);
 	transform-origin: center center;
 	.thing{
-		@include size(50px, 50px);
-		display: inline-block;
-		background-color: black;
-		margin: 5% 5% 0 5%;
-		border-radius: 50%;
-		overflow: hidden; 
+		// @include size(60px, 40px);
+		// display: inline-block;
+		// background-color: black;
+		// margin: 5% 5% 0 5%;
+		// border-radius: 50%;
+		// overflow: hidden; 
+	    width: 200px;
+	    height: 200px;
+	    background: white;
+	    border-radius: 75% 15%;
+	    transform: rotate(45deg) scale(0.3);
+	    display: inline-block;
+	    overflow: hidden;
+	    position: absolute;
+	    // &:nth-child(1){
+	    $column: 1;
+  		&:nth-child(1){
+	    	background: black;
+	    	left: -25px;
+	    	top: -50px;
+	    }
+  		&:nth-child(2){
+	    	background: black;
+		    left: 75px;
+		    top: -50px;
+	    }
+  		&:nth-child(3){
+	    	background: black;
+	    	left: 180px;
+	    	top: -50px;
+	    }
+  		&:nth-child(4){
+	    	background: black;
+	    	left: 280px;
+	    	top: -50px;
+	    }
 		.eye{
-			@include size(20px, 20px);
-			transform-origin: center center;
-			background-color: $eye-color;
-			border-radius: 10px;
-		 	margin-top: -10px;
-			top: 20px;
-			position: relative;
-			border: 1px solid #000;
-			transition: 0.2s ease;
+			// @include size(30px, 30px);
+			// transform-origin: center center;
+			// background-color: $eye-color;
+			// border-radius: 50%;
+		 // 	margin-top: -10px;
+			// top: 20px;
+			// position: relative;
+			// border: 1px solid #000;
+			// transition: 0.2s ease;
+		    transform: rotate(-45deg);
+		    position: absolute;
+		    width: 200px;
+		    height: 200px;
+		    top: 0;
+		    left: 0;
+			}
+			.iris{
+			    width: 120px;
+			    height: 120px;
+			    background: lightblue;
+			    border-radius: 100%;
+			    transition: 0.2s ease;
+			    transform: translate(0, 0);
+			    // CENTER
+			    border: 1px solid black;
+			    position: absolute;
+			    top: 0;
+			    left: 0;
+			    right: 0;
+			    bottom: 0;
+			    margin: auto;
+			}
+			.pupil{
+			    width: 50px;
+			    height: 50px;
+			    background: black;
+			    border-radius: 100%;
+			    transition: 0.2s ease;
+			    // CENTER
+			    border: 1px solid black;
+			    position: absolute;
+			    top: 0;
+			    left: 0;
+			    right: 0;
+			    bottom: 0;
+			    margin: auto;
+			}
 		}
 	}
-	.tear{
-		opacity: 0;
-		&.cry{
-			animation-name: cry-tear;
-			animation-iteration-count: 1;
-			animation-duration: 1.25s;
-		}
+
+
+.tear{
+	opacity: 0;
+	$test: [25%,50%,75%,100%];
+	&:nth-child(1){
+	    left: 20px;
+	    top: -40px;
+	}
+		&:nth-child(2){
+	    left: 125px;
+	    top: -40px;
+	}
+		&:nth-child(3){
+		left: 230px;
+		top: -40px;
+	}
+		&:nth-child(4){
+		left: 340px;
+		top: -40px;
+	}
+	&.cry{
+		animation-name: cry-tear;
+		animation-iteration-count: 1;
+		animation-duration: 1.25s;
+		// &:nth-child(1){
+		// 	animation-delay: 0s;
+		// }
+
+		// &:nth-child(2){
+		// 	animation-delay: 0.3s;
+		// }
+
+		// &:nth-child(3){
+		// 	animation-delay: 0.6s;
+		// }
+
+		// &:nth-child(4){
+		// 	animation-delay: 0.0s;
+		// }
+
 	}
 }
 
@@ -209,6 +317,7 @@ body{
 		border-radius: 50%;
 		transform-origin: bottom right;
 		transition: all 0.5s ease;
+		top: 15px;
 		&.laugh{
 			animation-name: laugh-lips;
 			animation-iteration-count: 1;
@@ -223,6 +332,11 @@ body{
   			animation-iteration-count: 1;
   			animation-duration: 1.25s;
   			// transition: cry-lips 1.25s ease-in-out;
+		}
+		&.crazy{
+			animation-name: crazy-lips;
+			animation-iteration-count: 1;
+			animation-duration: 1.25;
 		}
 	}
 }
@@ -369,14 +483,31 @@ body{
 	}
 }
 
+// --- // Crazy animations \\ ---
+@keyframes crazy-head{
+	from{
+		transform: translateY(0)
+	}
+	to{
+		transform: translateY(50px)
+	}
+}
 
-// @keyframes crazy-lips{
-// 	0%{}
-// 	25%{}
-// 	50%{}
-// 	100%{}
-// }
+@keyframes crazy-lips{
+	from{
+		border-width: 10px;
+		transform: translate($lipsX, -10px)
+	}
+	to{
+		border-width: 10px;
+		transform: translate($lipsX, -10px)
+	}
+}
 
+@keyframes crazy-lips{
+	from{}
+	to{}
+}
 
 // Animation for a sweet smile
 @keyframes smile {
