@@ -144,17 +144,20 @@ function removeEmotionalStates(animInfo){
 	}
 }
 
-var rythym = function(bool){
-	var rythm = new Rythm();
-	rythm.setMusic("music/em.mp3");
-	if(bool){
-		rythm.start();	
+var Ryth = function(){
+	this.rythm = new Rythm();
+	this.setMusic = function(){
+		this.rythm.setMusic("music/em.mp3");
 	}
-	else{
-		rythm.stop();
+	this.play = function(){
+		this.rythm.start();
 	}
 
 }
+
+var bouncy = new Ryth();
+bouncy.setMusic();
+bouncy.play();
 
 /**
  * Log something with styling
