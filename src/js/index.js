@@ -83,7 +83,7 @@ document.body.addEventListener('mousemove', function(e){
 		    var pX = (dX) * 100 / 200;
 
 		    if(i === 0){
-		      console.log(pX);
+		      // console.log(pX);
 		    }
 
 		    // To move pupil and iris 
@@ -126,6 +126,7 @@ crazyBtn.addEventListener('click', beCrazee)
 PrefixedEvent(lips, 'animationend', removeEmotionalStates);
 PrefixedEvent(head, 'animationend', removeEmotionalStates);
 PrefixedEvent(tears, 'animationend', removeEmotionalStates, true);
+PrefixedEvent(eye, 'animationend', removeEmotionalStates, true);
 PrefixedEvent(bodyTag, 'animationend', removeEmotionalStates);
 
 /**
@@ -141,6 +142,18 @@ function removeEmotionalStates(animInfo){
 			this.classList.remove(emotionalStates[i]);
 		}
 	}
+}
+
+var rythym = function(bool){
+	var rythm = new Rythm();
+	rythm.setMusic("music/em.mp3");
+	if(bool){
+		rythm.start();	
+	}
+	else{
+		rythm.stop();
+	}
+
 }
 
 /**
@@ -193,6 +206,9 @@ function beCrazee(){
 	lips.classList.add('crazy');
 	head.classList.add('crazy');
 	bodyTag.classList.add('crazy');
+
+	// console.log(iris);
+	addClassToList(eye, 'crazy');
 }
 
 function makeTearDrop(el, duration) {
@@ -208,6 +224,12 @@ function makeTearDrop(el, duration) {
 var log = function(message){
 	console.log('--------');
 	console.log(message);
+}
+
+var addClassToList = function(l, c){
+	for (var i = l.length - 1; i >= 0; i--) {
+		l[i].classList.add(c);
+	}
 }
 
 /**

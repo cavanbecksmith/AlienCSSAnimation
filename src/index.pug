@@ -9,9 +9,9 @@ link(rel="stylesheet" href=css)
 .character
 	//- .head
 	//- 	.brain
-	.head
+	.head.rythm-bass
 		.skull
-			.brain
+			.brain.rythm-bass
 				while brainPiece < 4
 					- brainPiece++
 					.piece
@@ -20,7 +20,7 @@ link(rel="stylesheet" href=css)
 				- eyes++
 				//- include svg/teardrop.svg
 				.thing
-					.eye
+					.eye.rythm-bass
 						.iris
 							.pupil
 			.tears
@@ -35,4 +35,5 @@ link(rel="stylesheet" href=css)
 	.btn.cry Make me cry :(
 	.btn.crazy Make me crazy! 8D
 script
+	include js/rhythm.js
 	include js/index.js
