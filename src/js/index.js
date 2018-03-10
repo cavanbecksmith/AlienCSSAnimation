@@ -19,6 +19,39 @@ var boundaries = {
 	}
 }
 
+
+var tl = new TimelineMax();
+
+
+var Ryth = function(){
+	this.rythm = new Rythm();
+	this.jukeboxPlaying = false
+	this.setMusic = function(){
+		this.rythm.setMusic("music/skillz.mp3");
+	}
+	this.play = function(){
+		this.rythm.start();
+	}
+	this.stop = function(){
+		this.rythm.stop();
+	}
+	this.toggle = (function(){
+		this.jukeboxPlaying = !this.jukeboxPlaying;
+		console.log(this);
+		if(this.jukeboxPlaying){
+			this.play();
+		}
+		else{
+			this.stop();
+		}
+	}).bind(this);
+}
+
+var bouncy = new Ryth();
+bouncy.setMusic();
+
+
+// --- Body part's and emotions states!... That's actually kinda wierd :/
 var eye = document.querySelectorAll('.eye');
 var iris = document.querySelectorAll(".iris");
 var pupil = document.querySelectorAll(".pupil");
@@ -116,12 +149,14 @@ var tears = document.querySelectorAll(".tear");
 var laughBtn = document.querySelector('div.btn.laugh');
 var cryBtn = document.querySelector('div.btn.cry');
 var crazyBtn = document.querySelector('div.btn.crazy');
+var playdadookBtn = document.querySelector('.dookbox');
 
 
 // Event listeners
 laughBtn.addEventListener('click', doLaugh)
 cryBtn.addEventListener('click', doCry)
 crazyBtn.addEventListener('click', beCrazee)
+playdadookBtn.addEventListener('click', bouncy.toggle)
 
 PrefixedEvent(lips, 'animationend', removeEmotionalStates);
 PrefixedEvent(head, 'animationend', removeEmotionalStates);
@@ -144,20 +179,9 @@ function removeEmotionalStates(animInfo){
 	}
 }
 
-var Ryth = function(){
-	this.rythm = new Rythm();
-	this.setMusic = function(){
-		this.rythm.setMusic("music/em.mp3");
-	}
-	this.play = function(){
-		this.rythm.start();
-	}
 
-}
 
-var bouncy = new Ryth();
-bouncy.setMusic();
-bouncy.play();
+// bouncy.play();
 
 /**
  * Log something with styling
@@ -184,10 +208,6 @@ function moveEye(left, top){
 		i.children[0].style.transform = 'translate(' + left + '%, ' + top +  '%)';
 	}
 	
-}
-
-function moveEyeAlt(){
-
 }
 
 
