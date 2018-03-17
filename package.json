@@ -7,10 +7,9 @@
     "dev": "concurrently \"npm run build-pug\" \"npm run build-scss\"",
     "build-css": "node-sass -w --include-path scss src/scss/index.scss --output ./build/css/main.css",
     "build-scss": "node-sass -w --include-path scss src/scss/index.scss build/css/main.css",
-    "build-pug": "pug -P -w ./src/index.pug --out build",
-    "build-js": "babel src/js -d build/js --presets es2015"
+    "build-pug": "pug -P -w ./src/index.pug --out build"
   },
-  "author": "",
+  "author": "Cavan Becksmith",
   "license": "ISC",
   "devDependencies": {
     "babel-cli": "^6.26.0",
