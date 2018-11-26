@@ -17,5 +17,8 @@
     "concurrently": "^3.5.1",
     "node-sass": "^4.7.2",
     "nodemon": "^1.15.1"
+  },
+  "dependencies": {
+    "pug": "^2.0.3"
   }
 }
